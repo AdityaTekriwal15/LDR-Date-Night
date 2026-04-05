@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LDR Date Night</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --ink: #1A1714;
+    --soft: #8C7B6B;
+    --accent: #C4573A;
+    --blush: #E8D5CC;
+    --card: #FDFAF6;
+    --border: rgba(26,23,20,0.12);
+    --green: #4A6741;
+    --mauve: #7A5C6E;
+    --navy: #2E3D5C;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .container {
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--soft);
+    margin-bottom: 0.75rem;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  header p {
+    margin-top: 0.75rem;
+    font-size: 14px;
+    color: var(--soft);
+    line-height: 1.6;
+  }
+
+  .names-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .name-field {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+  }
+
+  .name-field label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--soft);
+    margin-bottom: 4px;
+  }
+
+  .name-field input {
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    width: 100%;
+    outline: none;
+  }
+
+  .name-field input::placeholder { color: var(--blush); }
+
+  .scores-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .score-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .score-box .score-name {
+    font-size: 12px;
+    color: var(--soft);
+    margin-bottom: 4px;
+  }
+
+  .score-box .score-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .progress-bar {
+    height: 3px;
+    background: var(--blush);
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.35s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pill {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .pill-warm { background: #EDE0D4; color: #7A4F35; }
+  .pill-deep { background: #DDD8EB; color: #4A3B6B; }
+  .pill-us { background: #D4E5D2; color: #2E5228; }
+  .pill-flirty { background: #EDD8E0; color: #7A3550; }
+  .pill-future { background: #D2DCE8; color: #2A3D5C; }
+  .pill-geo { background: #D8E8D4; color: #2E5228; }
+
+  .round-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.25rem 0;
+  }
+
+  .question-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+  }
+
+  .forfeit {
+    background: var(--blush);
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    font-size: 13px;
+    color: var(--soft);
+    line-height: 1.6;
+  }
+
+  .forfeit strong {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .geo-desc {
+    font-size: 14px;
+    color: var(--soft);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .geo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 100px;
+    padding: 8px 18px;
+    text-decoration: none;
+    transition: background 0.15s;
+    margin-bottom: 1.25rem;
+  }
+
+  .geo-link:hover { background: rgba(74,103,65,0.08); }
+
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1.25rem;
+  }
+
+  button {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 9px 18px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  button:hover { background: var(--blush); }
+  button:active { transform: scale(0.97); }
+
+  .btn-next {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+
+  .btn-next:hover { background: var(--accent); border-color: var(--accent); }
+
+  .btn-pt { border-color: var(--accent); color: var(--accent); }
+  .btn-pt:hover { background: rgba(196,87,58,0.08); }
+
+  .q-counter {
+    font-size: 12px;
+    color: var(--soft);
+    margin-bottom: 1.5rem;
+  }
+
+  .end-card {
+    text-align: center;
+    padding: 3rem 1.75rem;
+  }
+
+  .end-card .trophy {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .end-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .end-card p {
+    font-size: 14px;
+    color: var(--soft);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .final-scores {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .final-scores div { text-align: center; }
+  .final-scores .fs-name { font-size: 12px; color: var(--soft); margin-bottom: 4px; }
+  .final-scores .fs-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--ink);
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 12px;
+    color: var(--soft);
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="eyebrow">Long distance date night</div>
+    <h1>The <em>Distance</em> Game</h1>
+    <p>Questions, forfeits &amp; GeoGuessr. Take turns. Be honest. Be brave.</p>
+  </header>
+
+  <div class="names-row">
+    <div class="name-field">
+      <label>Your name</label>
+      <input id="p1name" type="text" placeholder="You" />
+    </div>
+    <div class="name-field">
+      <label>Their name</label>
+      <input id="p2name" type="text" placeholder="Them" />
+    </div>
+  </div>
+
+  <div class="scores-row">
+    <div class="score-box">
+      <div class="score-name" id="s1label">You</div>
+      <div class="score-num" id="p1score">0</div>
+    </div>
+    <div class="score-box">
+      <div class="score-name" id="s2label">Them</div>
+      <div class="score-num" id="p2score">0</div>
+    </div>
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
+
+  <div id="main"></div>
+
+  <footer>made with love, across the distance</footer>
+
+</div>
+
+<script>
+const rounds = [
+  {
+    type: 'geo',
+    title: 'Round 1 — GeoGuessr warmup',
+    pill: 'pill-geo', pillLabel: 'GeoGuessr',
+    desc: 'Both open GeoGuessr and play the same Daily Challenge. Whoever scores lower has to answer the first question and take the forfeit. Screenshot your scores so there\'s proof.'
+  },
+  {
+    type: 'questions',
+    title: 'Round 2 — Warm up',
+    pill: 'pill-warm', pillLabel: 'Getting started',
+    questions: [
+      "What do you do on the nights you miss me most?",
+      "What's something you pretend to like but actually can't stand?"
+    ],
+    forfeits: [
+      "Talk in an accent of the other person's choice for the next 3 questions.",
+      "Send a voice note to a random contact saying something completely ridiculous — chosen by the other person."
+    ]
+  },
+  {
+    type: 'questions',
+    title: 'Round 3 — Who are you really',
+    pill: 'pill-deep', pillLabel: 'Deep',
+    questions: [
+      "What part of your personality did you have to hide growing up?",
+      "What's something you believe that most people in your life would disagree with?"
+    ],
+    forfeits: [
+      "Eat something weird from your fridge on camera right now.",
+      "Do your best impression of the other person — they score it out of 10."
+    ]
+  },
+  {
+    type: 'geo',
+    title: 'Round 4 — GeoGuessr round 2',
+    pill: 'pill-geo', pillLabel: 'GeoGuessr',
+    desc: 'Another round on GeoGuessr. Same rules — lower score answers the next question and takes the forfeit. Cumulative scores carry over.'
+  },
+  {
+    type: 'questions',
+    title: 'Round 5 — Us',
+    pill: 'pill-us', pillLabel: 'Us',
+    questions: [
+      "When did you first think 'okay, I actually really like this person'?",
+      "What's something you're scared to need from me?",
+      "What's something about this relationship that surprised you?"
+    ],
+    forfeits: [
+      "Let the other person post anything — anything — on your Instagram story.",
+      "Say three things you love about the other person. Out loud. No cringing."
+    ]
+  },
+  {
+    type: 'questions',
+    title: 'Round 6 — Flirty',
+    pill: 'pill-flirty', pillLabel: 'Flirty',
+    questions: [
+      "What's the most attractive thing I've done without realising it?",
+      "What's something you've thought about doing with me but haven't suggested yet?",
+      "What do you want me to do the next time I see you?",
+      "What's something you want more of when we're together?",
+      "What do you think about when you miss me that way?"
+    ],
+    forfeits: [
+      "Describe in detail what you'd do if we were in the same room right now.",
+      "Send a voice note saying something you'd normally only say in person."
+    ]
+  },
+  {
+    type: 'geo',
+    title: 'Round 7 — GeoGuessr final',
+    pill: 'pill-geo', pillLabel: 'GeoGuessr',
+    desc: 'Last GeoGuessr round. Whoever has the lowest cumulative score across all three rounds loses the game and takes the final forfeit. Make it count.'
+  },
+  {
+    type: 'questions',
+    title: 'Round 8 — When we make it',
+    pill: 'pill-future', pillLabel: 'Future',
+    questions: [
+      "What's the first boring everyday thing you want to do together when the distance is gone?",
+      "What are you building right now that's partly for us?",
+      "What do you want us to still be doing when we're really old and creaky?"
+    ],
+    forfeits: [
+      "Plan one specific date you'll go on when you're next together — right now, out loud, in detail.",
+      "Say the thing you've been meaning to say but keep putting off."
+    ]
+  }
+];
+
+let ri = 0, qi = 0, p1 = 0, p2 = 0;
+
+function n1() { return document.getElementById('p1name').value.trim() || 'You'; }
+function n2() { return document.getElementById('p2name').value.trim() || 'Them'; }
+
+function updateNames() {
+  document.getElementById('s1label').textContent = n1();
+  document.getElementById('s2label').textContent = n2();
+}
+
+document.getElementById('p1name').addEventListener('input', updateNames);
+document.getElementById('p2name').addEventListener('input', updateNames);
+
+function render() {
+  document.getElementById('p1score').textContent = p1;
+  document.getElementById('p2score').textContent = p2;
+  document.getElementById('prog').style.width = Math.round((ri / rounds.length) * 100) + '%';
+
+  const main = document.getElementById('main');
+
+  if (ri >= rounds.length) {
+    const winner = p1 > p2 ? n1() : p2 > p1 ? n2() : null;
+    main.innerHTML = `
+      <div class="card end-card">
+        <div class="trophy">✦</div>
+        <h2>${winner ? winner + ' wins' : "It's a tie"}</h2>
+        <p>${winner ? 'Well played. Now go call each other.' : 'You both win. Honestly the right result.'}</p>
+        <div class="final-scores">
+          <div><div class="fs-name">${n1()}</div><div class="fs-num">${p1}</div></div>
+          <div><div class="fs-name">${n2()}</div><div class="fs-num">${p2}</div></div>
+        </div>
+        <button class="btn-next" onclick="reset()">Play again</button>
+      </div>`;
+    return;
+  }
+
+  const r = rounds[ri];
+
+  if (r.type === 'geo') {
+    main.innerHTML = `
+      <div class="card">
+        <span class="pill ${r.pill}">${r.pillLabel}</span>
+        <div class="round-title">${r.title}</div>
+        <hr class="divider">
+        <p class="geo-desc">${r.desc}</p>
+        <a class="geo-link" href="https://www.geoguessr.com/maps/world/daily-challenge" target="_blank">Open GeoGuessr Daily Challenge ↗</a>
+        <div class="forfeit"><strong>Remember</strong>Lower score = answer the next question + take the forfeit.</div>
+        <div class="btn-row">
+          <button class="btn-next" onclick="nextRound()">We played — next round →</button>
+          <button class="btn-pt" onclick="addScore(1)">+ point ${n1()}</button>
+          <button class="btn-pt" onclick="addScore(2)">+ point ${n2()}</button>
+        </div>
+      </div>`;
+  } else {
+    const q = r.questions[qi];
+    const f = r.forfeits[Math.floor(Math.random() * r.forfeits.length)];
+    const isLast = qi >= r.questions.length - 1;
+    main.innerHTML = `
+      <div class="card">
+        <span class="pill ${r.pill}">${r.pillLabel}</span>
+        <div class="round-title">${r.title}</div>
+        <div class="q-counter">Question ${qi + 1} of ${r.questions.length}</div>
+        <div class="question-text">${q}</div>
+        <div class="forfeit"><strong>Forfeit if you refuse</strong>${f}</div>
+        <div class="btn-row">
+          <button class="btn-next" onclick="nextQ()">${isLast ? 'Next round →' : 'Next question →'}</button>
+          <button class="btn-pt" onclick="addScore(1)">+ point ${n1()}</button>
+          <button class="btn-pt" onclick="addScore(2)">+ point ${n2()}</button>
+        </div>
+      </div>`;
+  }
+}
+
+function nextQ() {
+  const r = rounds[ri];
+  if (r.type === 'questions' && qi < r.questions.length - 1) { qi++; }
+  else { nextRound(); }
+}
+
+function nextRound() { ri++; qi = 0; render(); }
+function addScore(p) { if (p === 1) p1++; else p2++; render(); }
+function reset() { ri = 0; qi = 0; p1 = 0; p2 = 0; render(); }
+
+render();
+</script>
+</body>
+</html>
