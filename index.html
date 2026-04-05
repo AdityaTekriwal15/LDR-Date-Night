@@ -212,7 +212,7 @@ footer {
   <footer>FOR LINDSIE WITH ALL MY LOVE</footer>
 </div>
 
-<audio id="bg-music" loop src="https://cdn.pixabay.com/audio/2022/02/22/audio_d0c6ff1bab.mp3"></audio>
+<audio id="bg-music" loop src="https://cdn.pixabay.com/audio/2021/09/06/audio_8c1b3e0e5f.mp3"></audio>
 
 <script>
 const POOL = [
@@ -270,12 +270,14 @@ function saveNames() { if (phase === 'pick-asker') render(); }
 function toggleAudio() {
   const audio = document.getElementById('bg-music');
   const btn = document.getElementById('sound-toggle');
-  if (audio.paused) { 
-    audio.play(); 
+
+  if (audio.paused) {
+    audio.volume = 0.4; // softer by default
+    audio.play();
     btn.style.opacity = "1";
     btn.innerText = "Music: On";
-  } else { 
-    audio.pause(); 
+  } else {
+    audio.pause();
     btn.style.opacity = "0.5";
     btn.innerText = "Music";
   }
