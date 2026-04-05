@@ -878,7 +878,7 @@ function buildMusic() {
   musicAudio.preload = "auto";
 
   const master = audioCtx.createGain();
-  master.gain.value = 0.7;
+  master.gain.setTargetAtTime(0.30, audioCtx.currentTime, 0.05);;
   master.connect(audioCtx.destination);
 
   musicSource = audioCtx.createMediaElementSource(musicAudio);
