@@ -9,11 +9,9 @@
 :root {
   --rose: #e5989b;
   --deep-rose: #b56576;
-  --gold: #dfb48c;
   --cream: #fffaf5;
   --dark: #352f36;
-  --glass: rgba(255, 255, 255, 0.8);
-  --shadow: 0 10px 30px rgba(181, 101, 118, 0.15);
+  --glass: rgba(255, 255, 255, 0.7);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -21,191 +19,173 @@
 body {
   background: var(--cream);
   background-image: 
-    radial-gradient(at 0% 0%, rgba(229, 152, 155, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(223, 180, 140, 0.15) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(229, 152, 155, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(223, 180, 140, 0.1) 0px, transparent 50%);
   color: var(--dark);
   font-family: 'Montserrat', sans-serif;
   min-height: 100vh;
-  padding: 5rem 1rem 2rem;
-  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 
-/* ── MINIMAL MUSIC TOGGLE ── */
-#music-toggle {
-  position: fixed;
+#sound-toggle {
+  position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  background: var(--glass);
-  border: 1px solid rgba(229, 152, 155, 0.2);
-  padding: 8px 16px;
-  border-radius: 30px;
+  background: none;
+  border: none;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
   color: var(--deep-rose);
   cursor: pointer;
   text-transform: uppercase;
-  z-index: 1000;
-  transition: all 0.3s ease;
+  font-weight: 300;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
 }
 
-#music-toggle:hover {
-  background: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
+#sound-toggle:hover { opacity: 1; }
 
-.container { max-width: 600px; margin: 0 auto; position: relative; }
+.container { max-width: 550px; margin: auto; width: 100%; position: relative; padding-top: 2rem; }
 
-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
+header { text-align: center; margin-bottom: 3rem; }
 
 header h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 7vw, 3rem);
+  font-size: clamp(2rem, 8vw, 2.8rem);
   color: var(--deep-rose);
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 header .subtitle {
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: var(--rose);
   font-weight: 500;
+  letter-spacing: 0.05em;
 }
 
 .names-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  gap: 12px;
   margin-bottom: 2rem;
 }
 
 .name-input-wrap {
   background: var(--glass);
-  border: 1px solid rgba(229, 152, 155, 0.3);
-  border-radius: 12px;
-  padding: 0.8rem 1rem;
+  border: 1px solid rgba(229, 152, 155, 0.15);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
 }
 
 .name-input-wrap label {
   display: block;
-  font-size: 0.65rem;
-  font-weight: 600;
+  font-size: 0.55rem;
+  font-weight: 700;
   color: var(--deep-rose);
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .name-input-wrap input {
   border: none;
   background: transparent;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.9rem;
   color: var(--dark);
   width: 100%;
   outline: none;
 }
 
 .progress-bar {
-  height: 2px;
-  background: rgba(229, 152, 155, 0.2);
-  border-radius: 10px;
-  margin-bottom: 2rem;
-  overflow: hidden;
+  height: 1px;
+  background: rgba(229, 152, 155, 0.15);
+  margin-bottom: 2.5rem;
 }
 
 .progress-fill {
   height: 100%;
   background: var(--deep-rose);
   width: 0%;
-  transition: width 0.6s ease;
+  transition: width 0.8s ease;
 }
 
 .card {
-  background: var(--glass);
-  backdrop-filter: blur(10px);
-  border: 1px solid white;
-  border-radius: 24px;
-  padding: 2.5rem 2rem;
-  box-shadow: var(--shadow);
+  background: white;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 0 15px 40px rgba(181, 101, 118, 0.08);
   text-align: center;
-  min-height: 350px;
+  min-height: 380px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .round-info {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: var(--rose);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 1rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 1.5rem;
 }
 
 .card-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: var(--dark);
   margin-bottom: 2rem;
 }
 
-.btn-group { display: flex; flex-direction: column; gap: 12px; }
+.btn-group { display: flex; flex-direction: column; gap: 10px; }
 
-button {
+button.game-btn {
   font-family: 'Montserrat', sans-serif;
-  padding: 1.2rem;
-  border-radius: 15px;
-  border: 1px solid rgba(229, 152, 155, 0.2);
-  background: white;
+  padding: 1.1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(229, 152, 155, 0.1);
+  background: #fff;
   color: var(--dark);
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s;
 }
 
-button:hover:not(:disabled) {
-  border-color: var(--rose);
-  background: var(--cream);
-  transform: translateY(-1px);
-}
+button.game-btn:hover { background: var(--cream); border-color: var(--rose); }
 
-button.primary { background: var(--deep-rose); color: white; border: none; margin-top: 1.5rem; }
-button.primary:disabled { opacity: 0.5; cursor: default; }
-button.selected { border-color: var(--deep-rose); background: rgba(181, 101, 118, 0.05); }
+button.primary { background: var(--deep-rose); color: white; border: none; margin-top: 1.5rem; font-weight: 500; }
+button.primary:disabled { opacity: 0.2; }
+button.selected { border-color: var(--deep-rose); background: rgba(181, 101, 118, 0.03); font-weight: 600; }
 
 .question-box {
-  background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  margin-bottom: 2rem;
   font-family: 'Playfair Display', serif;
   font-size: 1.4rem;
   font-style: italic;
   color: var(--deep-rose);
   line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
-.instruction { font-size: 0.85rem; color: var(--rose); margin-top: 1rem; }
+.instruction { font-size: 0.75rem; color: var(--rose); margin-top: 1rem; }
 
 footer {
   text-align: center;
   margin-top: 4rem;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.7rem;
+  font-weight: 500;
   color: var(--deep-rose);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
 }
 </style>
 </head>
 <body>
 
-<button id="music-toggle" onclick="toggleMusic()">Music: Off</button>
+<button id="sound-toggle" onclick="toggleAudio()">Ambience</button>
 
 <div class="container">
   <header>
@@ -231,64 +211,50 @@ footer {
   <footer>FOR LINDSIE WITH ALL MY LOVE</footer>
 </div>
 
-<audio id="bg-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"></audio>
+<audio id="bg-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
 <script>
-// ── EXTENDED QUESTION POOL ──
-const ALL_QUESTIONS = [
+// Balanced Pool (40% flirty/sexual, 60% character/LDR)
+const POOL = [
+  // Flirty / Sexual
+  "If I were lying next to you right now, what is the very first thing you’d do?",
+  "What is the most attractive thing I've done without realizing it?",
+  "What do you think about when you miss me in 'that' way?",
+  "Describe exactly how you want me to kiss you the second we see each other next.",
+  "What part of my body have you been thinking about the most today?",
+  "What were you genuinely thinking the first time you saw me naked?",
+  "What’s something you want me to do the next time I see you?",
+  "What is a fantasy you’ve never told anyone else?",
+  "What's a specific spot you want me to kiss you next time I see you?",
+  "What shirt or hoodie of mine do you wish you were wearing tonight?",
+  "What is your favorite way for me to touch you when we're just relaxing?",
+  "What is something I do that instantly turns you on without me even trying?",
+  "What's something you've thought about doing with me but haven't suggested yet?",
+  "What's something you want more of when we're together?",
+  
+  // Character / LDR / Someday
   "If your friends had to describe your worst quality, what would they say?",
-  "What's something you're secretly really proud of but would never brag about?",
+  "What's something you're secretly proud of but would never brag about?",
   "What's the pettiest thing you've ever done?",
-  "When was the last time you were genuinely wrong about something and had to admit it?",
-  "What's your most controversial food opinion?",
-  "What's something you want to do but are too scared to admit you want?",
-  "What's something you'd do differently if nobody was watching?",
-  "What are you most afraid people would find out about you?",
+  "When was the last time you were genuinely wrong and had to admit it?",
+  "What would you do differently if nobody was watching?",
   "What's a dream you've quietly given up on?",
   "What did you first notice about me that you'd never say unprompted?",
-  "What's something I do that you find secretly endearing but would never mention?",
-  "When did you first think 'okay I actually really like this person'?",
-  "What's something you wish you could ask me but haven't?",
-  "What's something you do when you're alone that you'd never do in front of anyone?",
-  "What's a guilty pleasure you've never told me about?",
-  "What do you think about before you fall asleep?",
-  "What's something that always cheers you up that you'd be embarrassed to admit?",
-  "When do you feel most like yourself?",
-  "What's something you've thought about doing with me but haven't suggested yet?",
-  "What's the most attractive thing I've done without realising it?",
-  "What do you think about when you miss me in that way?",
-  "What's something you want more of when we're together?",
-  "What's a fantasy you've never told anyone?",
-  "What's something you want me to do the next time I see you?",
-  "What's the first thing you want to do the moment we're in the same room?",
-  "Is there somewhere you've been imagining taking me?",
-  "What's a normal everyday thing you're most excited to do together in person?",
-  "What's something you want to say to me that's easier face to face?",
-  "What do you want our first morning together to look like?",
-  "What's something you've been saving for when we're in the same place?",
+  "What do I do that you find secretly endearing but never mention?",
+  "When did you first think 'okay, I actually really like this person'?",
+  "What do you think about right before you fall asleep?",
+  "What cheers you up that you'd be embarrassed to admit?",
   "What version of yourself are you still trying to become?",
-  "What's something you believe that most people in your life would disagree with?",
   "What do you think is the most misunderstood thing about you?",
-  "What's something you've never quite forgiven yourself for?",
-  "What part of your personality did you have to hide growing up?",
-  "What's something about this relationship that surprised you?",
-  "When did you realise this was something real for you?",
-  "What's something you're scared to need from me?",
-  "What do you hope I never change?",
-  "What does a genuinely good life look like to you, specifically?",
-  "What's something you've been wanting to try with me but haven't brought up yet?",
-  "When was the last time you were proud of us as a couple?",
-  "What was the hardest part about the distance you never fully told me about?",
-  "What do you do on the nights you miss me most?",
-  "What keeps you going when it feels impossible?",
-  "What's something you've learned about yourself because of the distance?",
-  "What's something about being apart that's unexpectedly made us stronger?",
-  "What's something I do that changes you without me realising it?",
-  "What's the first boring domestic thing you want to do together when the distance is gone?",
-  "What do you want us to still be doing when we're really old and creaky?"
+  "What was the hardest part about the distance you never fully told me?",
+  "What keeps you going when the distance feels impossible?",
+  "What's the first 'boring' domestic thing you want to do when the distance is gone?",
+  "What do you want us to still be doing when we're really old and creaky?",
+  "What is somewhere you've been imagining taking me?",
+  "What's the most you've ever grown because of knowing me?",
+  "What's something you hope I never change?"
 ];
 
-// ── STATE ──
 let currentRound = 0;
 const totalRounds = 10;
 let phase = 'pick-asker';
@@ -296,20 +262,23 @@ let asker = null;
 let currentChoices = [];
 let selectedQuestionIdx = null;
 
-// Shuffle entire pool at start
-const shuffledPool = [...ALL_QUESTIONS].sort(() => Math.random() - 0.5);
+const shuffledPool = [...POOL].sort(() => Math.random() - 0.5);
 
-function getName(id) {
-  return document.getElementById(id).value.trim() || (id === 'p1' ? 'Babe' : 'Lindsie');
-}
-
+function getName(id) { return document.getElementById(id).value.trim() || (id === 'p1' ? 'Babe' : 'Lindsie'); }
 function saveNames() { if (phase === 'pick-asker') render(); }
 
-function toggleMusic() {
+function toggleAudio() {
   const audio = document.getElementById('bg-music');
-  const btn = document.getElementById('music-toggle');
-  if (audio.paused) { audio.play(); btn.innerText = "Music: On"; }
-  else { audio.pause(); btn.innerText = "Music: Off"; }
+  const btn = document.getElementById('sound-toggle');
+  if (audio.paused) { 
+    audio.play(); 
+    btn.style.opacity = "1";
+    btn.innerText = "Ambience: On";
+  } else { 
+    audio.pause(); 
+    btn.style.opacity = "0.4";
+    btn.innerText = "Ambience";
+  }
 }
 
 function render() {
@@ -318,70 +287,51 @@ function render() {
   progress.style.width = `${(currentRound / totalRounds) * 100}%`;
 
   if (currentRound >= totalRounds) {
-    ui.innerHTML = `
-      <div class="card">
-        <div class="card-title">I'm so glad we're doing this.</div>
-        <div class="question-box">Distance is just a test of how far love can travel. I love you, Lindsie.</div>
-        <button class="primary" onclick="location.reload()">Play Again</button>
-      </div>`;
+    ui.innerHTML = `<div class="card"><div class="card-title">You're everything.</div><div class="question-box">Distance is just a test of how far love can travel. I love you, Lindsie.</div><button class="game-btn primary" onclick="location.reload()">Start Again</button></div>`;
     return;
   }
 
   if (phase === 'pick-asker') {
     ui.innerHTML = `
       <div class="card">
-        <div class="round-info">Round ${currentRound + 1} of ${totalRounds}</div>
-        <div class="card-title">Who is asking this round?</div>
+        <div class="round-info">Round ${currentRound + 1}</div>
+        <div class="card-title">Who is asking?</div>
         <div class="btn-group">
-          <button onclick="setAsker(1)">${getName('p1')}</button>
-          <button onclick="setAsker(2)">${getName('p2')}</button>
+          <button class="game-btn" onclick="setAsker(1)">${getName('p1')}</button>
+          <button class="game-btn" onclick="setAsker(2)">${getName('p2')}</button>
         </div>
       </div>`;
-  } 
-  else if (phase === 'pick-question') {
+  } else if (phase === 'pick-question') {
     ui.innerHTML = `
       <div class="card">
         <div class="round-info">Round ${currentRound + 1}</div>
-        <div class="card-title">${asker === 1 ? getName('p1') : getName('p2')}, pick a question:</div>
+        <div class="card-title">${asker === 1 ? getName('p1') : getName('p2')}, choose:</div>
         <div class="btn-group">
-          <button class="${selectedQuestionIdx === 0 ? 'selected' : ''}" onclick="selectQ(0)">${currentChoices[0]}</button>
-          <button class="${selectedQuestionIdx === 1 ? 'selected' : ''}" onclick="selectQ(1)">${currentChoices[1]}</button>
+          <button class="game-btn ${selectedQuestionIdx === 0 ? 'selected' : ''}" onclick="selectQ(0)">${currentChoices[0]}</button>
+          <button class="game-btn ${selectedQuestionIdx === 1 ? 'selected' : ''}" onclick="selectQ(1)">${currentChoices[1]}</button>
         </div>
-        <button class="primary" onclick="confirmQ()" ${selectedQuestionIdx === null ? 'disabled' : ''}>Ask this</button>
+        <button class="game-btn primary" onclick="confirmQ()" ${selectedQuestionIdx === null ? 'disabled' : ''}>Ask it</button>
       </div>`;
-  }
-  else if (phase === 'answer') {
+  } else if (phase === 'answer') {
     ui.innerHTML = `
       <div class="card">
         <div class="round-info">Round ${currentRound + 1}</div>
         <div class="question-box">"${currentChoices[selectedQuestionIdx]}"</div>
-        <div class="instruction">
-          ${asker === 1 ? getName('p2') : getName('p1')} answers first. <br>
-          Then, ${asker === 1 ? getName('p1') : getName('p2')} answers.
-        </div>
-        <button class="primary" onclick="nextRound()">Next Round</button>
+        <div class="instruction">${asker === 1 ? getName('p2') : getName('p1')} answers first, then ${asker === 1 ? getName('p1') : getName('p2')}.</div>
+        <button class="game-btn primary" onclick="nextRound()">Next Round</button>
       </div>`;
   }
 }
 
 function setAsker(num) {
   asker = num;
-  // Pick two random unique questions from the pool for this turn
-  const available = shuffledPool.slice(currentRound * 2, (currentRound * 2) + 2);
-  currentChoices = available;
+  currentChoices = shuffledPool.slice(currentRound * 2, (currentRound * 2) + 2);
   phase = 'pick-question';
   render();
 }
-
 function selectQ(idx) { selectedQuestionIdx = idx; render(); }
 function confirmQ() { phase = 'answer'; render(); }
-function nextRound() {
-  currentRound++;
-  phase = 'pick-asker';
-  asker = null;
-  selectedQuestionIdx = null;
-  render();
-}
+function nextRound() { currentRound++; phase = 'pick-asker'; asker = null; selectedQuestionIdx = null; render(); }
 
 render();
 </script>
